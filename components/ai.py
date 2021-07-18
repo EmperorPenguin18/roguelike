@@ -68,6 +68,6 @@ class HostileEnemy(BaseAI):
             dest_x, dest_y = self.path.pop(0)
             return MovementAction(
                 self.entity, dest_x - self.entity.x, dest_y - self.entity.y,
-+           ).perform()
+            ).perform()
 
-+       return WaitAction(self.entity).perform()
+        return WaitAction(self.entity).perform()
