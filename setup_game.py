@@ -83,7 +83,7 @@ class MainMenu(input_handlers.BaseEventHandler):
         console.print(
             console.width // 2,
             console.height // 2 - 4,
-            "TOMBS OF THE ANCIENT KINGS",
+            "Heists Ltd.",
             fg=color.menu_title,
             alignment=tcod.CENTER,
         )
