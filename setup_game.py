@@ -47,7 +47,7 @@ def new_game() -> Engine:
     engine.update_fov()
 
     engine.message_log.add_message(
-        "Hello and welcome, adventurer, to yet another dungeon!", color.welcome_text
+        "Hello and welcome to Heists Ltd.! Can you become the ultimate heister?", color.welcome_text
     )
     
     dagger = copy.deepcopy(entity_factories.dagger)
