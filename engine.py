@@ -64,7 +64,7 @@ class Engine:
         render_functions.render_money(
             console=console,
             money=self.game_world.money,
-            location=(0,50),
+            location=(0, 48),
         )
 
         render_functions.render_names_at_mouse_location(
