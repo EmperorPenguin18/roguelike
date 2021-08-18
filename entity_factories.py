@@ -79,3 +79,9 @@ leather_armor = Item(
 chain_mail = Item(
     char="[", color=(139, 69, 19), name="Ballistic Vest", equippable=equippable.ChainMail()
 )
+
+loot = Item(
+    char="$",
+    color=(249, 200, 4),
+    name="Loot",
+)
