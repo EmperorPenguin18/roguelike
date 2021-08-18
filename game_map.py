@@ -111,7 +111,8 @@ class GameWorld:
         max_rooms: int,
         room_min_size: int,
         room_max_size: int,
-        current_floor: int = 0
+        current_floor: int = 0,
+        money: int
     ):
         self.engine = engine
 
@@ -124,6 +125,8 @@ class GameWorld:
         self.room_max_size = room_max_size
 
         self.current_floor = current_floor
+        
+        self.money = money
 
     def generate_floor(self) -> None:
         from procgen import generate_dungeon
