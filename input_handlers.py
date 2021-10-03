@@ -306,6 +306,116 @@ class LevelUpEventHandler(AskUserEventHandler):
         return None
 
 
+class ShopEventHandler(AskUserEventHandler):
+
+    TITLE = "Welcome to the Black Market"
+
+    def on_render(self, console: tcod.Console) -> None:
+
+        height = 28
+        x = 0
+        y = 0
+        width = len(self.TITLE) + 4
+
+        console.draw_frame(
+            x=x,
+            y=y,
+            width=width,
+            height=height,
+            title=self.TITLE,
+            clear=True,
+            fg=(255, 255, 255),
+            bg=(0, 0, 0),
+        )
+        console.print(0, 30, "Money: " + str(self.engine.game_world.money))
+
+        for i in range(25):
+            item_key = chr(ord("a") + i)
+            price = "9999"
+
+            item_string = f"({item_key}) Placeholder   Price: {price}"
+
+            console.print(x + 1, y + i + 1, item_string)
+        console.print(x + 1, y + i + 2, f"(z) Start Heist")
+
+        self.engine.message_log.render(console=console, x=21, y=45, width=40, height=5)
+    
+    def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[ActionOrHandler]:
+        player = self.engine.player
+        key = event.sym
+        index = key - tcod.event.K_a
+        funds = self.engine.game_world.money
+
+        if 0 <= index <= 25:
+            if index == 0:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 1:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 2:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 3:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 4:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 5:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 6:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 7:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 8:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 9:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 10:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 11:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 12:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 13:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 14:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 15:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 16:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 17:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 18:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 19:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 20:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 21:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 22:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 23:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            elif index == 24:
+                self.engine.message_log.add_message("Not enough funds.", color.invalid)
+            else:
+                return actions.TakeStairsAction(player);
+            return None
+        else:
+            self.engine.message_log.add_message("Invalid entry.", color.invalid)
+
+            return None
+
+        return super().ev_keydown(event)
+
+    def ev_mousebuttondown(
+        self, event: tcod.event.MouseButtonDown
+    ) -> Optional[ActionOrHandler]:
+        """
+        Don't allow the player to click to exit the menu, like normal.
+        """
+        return None
+
+
 class InventoryEventHandler(AskUserEventHandler):
     """This handler lets the user select an item.
 
@@ -529,7 +639,7 @@ class MainGameEventHandler(EventHandler):
         if key == tcod.event.K_PERIOD and modifier & (
             tcod.event.KMOD_LSHIFT | tcod.event.KMOD_RSHIFT
         ):
-            return actions.TakeStairsAction(player)
+            return ShopEventHandler(self.engine)
         
         if key in MOVE_KEYS:
             dx, dy = MOVE_KEYS[key]
